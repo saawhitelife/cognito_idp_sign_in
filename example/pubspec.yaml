@@ -1,0 +1,17 @@
+name: cognito_idp_sign_in_example
+description: "Example for the cognito_idp_sign_in package."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  cognito_idp_sign_in:
+    path: ../
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
