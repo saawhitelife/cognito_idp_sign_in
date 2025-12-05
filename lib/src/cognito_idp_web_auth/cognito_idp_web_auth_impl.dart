@@ -18,6 +18,7 @@ class CognitoIdpWebAuth {
 
   Future<WebAuthFlowResult> startWebAuthFlow({
     required String clientId,
+    String? clientSecret,
     required Uri redirectUri,
     required String state,
     required String nonce,
@@ -32,6 +33,7 @@ class CognitoIdpWebAuth {
     try {
       final AuthorizationRequestParams authorizationUriQueryParams = AuthorizationRequestParams(
         clientId: clientId,
+        clientSecret: clientSecret,
         redirectUri: redirectUri.toString(),
         state: state,
         nonce: nonce,

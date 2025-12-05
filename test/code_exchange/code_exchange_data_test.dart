@@ -7,6 +7,7 @@ void main() {
       final Map<String, String> json = <String, String>{
         'grant_type': 'authorization_code',
         'client_id': 'client-123',
+        'client_secret': 'secret-xyz',
         'code': 'auth-code-xyz',
         'redirect_uri': 'myapp://callback',
         'code_verifier': 'verifier-abc',
@@ -16,6 +17,7 @@ void main() {
 
       expect(model.grantType, 'authorization_code');
       expect(model.clientId, 'client-123');
+      expect(model.clientSecret, 'secret-xyz');
       expect(model.code, 'auth-code-xyz');
       expect(model.redirectUri, 'myapp://callback');
       expect(model.codeVerifier, 'verifier-abc');
@@ -24,6 +26,7 @@ void main() {
     test('toJson outputs all fields with correct JSON keys', () {
       const CodeExchangeData model = CodeExchangeData(
         clientId: 'client-123',
+        clientSecret: 'secret-xyz',
         code: 'auth-code-xyz',
         redirectUri: 'myapp://callback',
         codeVerifier: 'verifier-abc',
@@ -34,15 +37,30 @@ void main() {
       expect(json, <String, String>{
         'grant_type': 'authorization_code',
         'client_id': 'client-123',
+        'client_secret': 'secret-xyz',
         'code': 'auth-code-xyz',
         'redirect_uri': 'myapp://callback',
         'code_verifier': 'verifier-abc',
       });
     });
 
+    test('toJson omits client_secret when not set', () {
+      const CodeExchangeData model = CodeExchangeData(
+        clientId: 'client-123',
+        code: 'auth-code-xyz',
+        redirectUri: 'myapp://callback',
+        codeVerifier: 'verifier-abc',
+      );
+
+      final Map<String, dynamic> json = model.toJson();
+
+      expect(json.containsKey('client_secret'), isFalse);
+    });
+
     test('round-trip: toJson → fromJson preserves data', () {
       const CodeExchangeData original = CodeExchangeData(
         clientId: 'client-123',
+        clientSecret: 'secret-xyz',
         code: 'auth-code-xyz',
         redirectUri: 'myapp://callback',
         codeVerifier: 'verifier-abc',
@@ -51,6 +69,7 @@ void main() {
       final CodeExchangeData reconstructed = CodeExchangeData.fromJson(original.toJson());
 
       expect(reconstructed.clientId, original.clientId);
+      expect(reconstructed.clientSecret, original.clientSecret);
       expect(reconstructed.code, original.code);
       expect(reconstructed.redirectUri, original.redirectUri);
       expect(reconstructed.codeVerifier, original.codeVerifier);
@@ -84,6 +103,7 @@ void main() {
       const CodeExchangeData model = CodeExchangeData(
         grantType: 'authorization_code',
         clientId: 'client-123',
+        clientSecret: 'secret-xyz',
         code: 'auth-code-xyz',
         redirectUri: 'myapp://callback',
         codeVerifier: 'verifier-abc',
@@ -91,7 +111,7 @@ void main() {
 
       expect(
         model.toString(),
-        'CodeExchangeData(grantType: authorization_code, clientId: client-123, code: auth-code-xyz, redirectUri: myapp://callback, codeVerifier: verifier-abc)',
+        'CodeExchangeData(grantType: authorization_code, clientId: client-123, clientSecret: secret-xyz, code: auth-code-xyz, redirectUri: myapp://callback, codeVerifier: verifier-abc)',
       );
     });
 
@@ -157,6 +177,26 @@ void main() {
 
         const CodeExchangeData model2 = CodeExchangeData(
           clientId: 'client-456',
+          code: 'auth-code-xyz',
+          redirectUri: 'myapp://callback',
+          codeVerifier: 'verifier-abc',
+        );
+
+        expect(model1 == model2, isFalse);
+      });
+
+      test('returns false when clientSecret differs', () {
+        const CodeExchangeData model1 = CodeExchangeData(
+          clientId: 'client-123',
+          clientSecret: 'secret-a',
+          code: 'auth-code-xyz',
+          redirectUri: 'myapp://callback',
+          codeVerifier: 'verifier-abc',
+        );
+
+        const CodeExchangeData model2 = CodeExchangeData(
+          clientId: 'client-123',
+          clientSecret: 'secret-b',
           code: 'auth-code-xyz',
           redirectUri: 'myapp://callback',
           codeVerifier: 'verifier-abc',

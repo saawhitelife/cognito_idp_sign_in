@@ -7,6 +7,7 @@ class CodeExchangeData {
   const CodeExchangeData({
     this.grantType = 'authorization_code',
     required this.clientId,
+    this.clientSecret,
     required this.code,
     required this.redirectUri,
     required this.codeVerifier,
@@ -15,6 +16,8 @@ class CodeExchangeData {
   final String grantType;
   @JsonKey(name: 'client_id')
   final String clientId;
+  @JsonKey(name: 'client_secret', includeIfNull: false)
+  final String? clientSecret;
   @JsonKey(name: 'code')
   final String code;
   @JsonKey(name: 'redirect_uri')
@@ -27,7 +30,7 @@ class CodeExchangeData {
 
   @override
   String toString() {
-    return 'CodeExchangeData(grantType: $grantType, clientId: $clientId, code: $code, redirectUri: $redirectUri, codeVerifier: $codeVerifier)';
+    return 'CodeExchangeData(grantType: $grantType, clientId: $clientId, clientSecret: $clientSecret, code: $code, redirectUri: $redirectUri, codeVerifier: $codeVerifier)';
   }
 
   @override
@@ -36,11 +39,12 @@ class CodeExchangeData {
     return other is CodeExchangeData &&
         other.grantType == grantType &&
         other.clientId == clientId &&
+        other.clientSecret == clientSecret &&
         other.code == code &&
         other.redirectUri == redirectUri &&
         other.codeVerifier == codeVerifier;
   }
 
   @override
-  int get hashCode => Object.hash(grantType, clientId, code, redirectUri, codeVerifier);
+  int get hashCode => Object.hash(grantType, clientId, clientSecret, code, redirectUri, codeVerifier);
 }

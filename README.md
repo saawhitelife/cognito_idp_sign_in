@@ -39,6 +39,7 @@ final cognitoIdpSignIn = CognitoIdpSignIn(
   CognitoIdpSignInOptions(
     poolId: 'us-east-1_XXXXXXXXX',
     clientId: 'your-client-id',
+    clientSecret: 'your-client-secret', // Optional
     hostedUiDomain: 'your-domain.auth.region.amazoncognito.com',
     redirectUri: Uri.parse('myapp://'),
     identityProviderName: 'SignInWithApple',

@@ -145,6 +145,7 @@ class CognitoIdpSignIn {
 
       final WebAuthFlowResult idpWebAuthResult = await _cognitoIdpWebAuth.startWebAuthFlow(
         clientId: options.clientId,
+        clientSecret: options.clientSecret,
         redirectUri: options.redirectUri,
         state: pkceBundle.state,
         nonce: pkceBundle.nonce,
@@ -321,6 +322,7 @@ class CognitoIdpSignIn {
 
       final CodeExchangeData codeExchangeData = CodeExchangeData(
         clientId: options.clientId,
+        clientSecret: options.clientSecret,
         code: authCode,
         redirectUri: options.redirectUri.toString(),
         codeVerifier: pkceBundle.codeVerifier,

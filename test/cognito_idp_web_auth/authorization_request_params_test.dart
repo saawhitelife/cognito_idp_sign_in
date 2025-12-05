@@ -9,6 +9,7 @@ void main() {
       final String challenge = 'challenge';
       final String identityProvider = 'SignInWithApple';
       final String clientId = 'client';
+      final String clientSecret = 'client-secret';
       final String redirectUri = 'myapp://cb';
       final String state = 'state123';
       final String nonce = 'nonce123';
@@ -16,6 +17,7 @@ void main() {
 
       final AuthorizationRequestParams params = AuthorizationRequestParams(
         clientId: clientId,
+        clientSecret: clientSecret,
         responseType: responseType,
         redirectUri: redirectUri,
         state: state,
@@ -31,6 +33,7 @@ void main() {
 
       // Standard fields
       expect(json['client_id'], clientId);
+      expect(json['client_secret'], clientSecret);
       expect(json['redirect_uri'], redirectUri);
       expect(json['state'], state);
       expect(json['nonce'], nonce);
@@ -47,9 +50,27 @@ void main() {
       expect(scope.contains('  '), isFalse);
     });
 
+    test('omits client_secret when not provided', () {
+      final AuthorizationRequestParams params = AuthorizationRequestParams(
+        clientId: 'client',
+        redirectUri: 'myapp://cb',
+        state: 'state123',
+        nonce: 'nonce123',
+        identityProvider: 'SignInWithApple',
+        codeChallenge: 'challenge',
+        codeChallengeMethod: .s256,
+        scopes: const <CognitoScope>[.openid, .email],
+      );
+
+      final Map<String, dynamic> json = params.toJson();
+
+      expect(json.containsKey('client_secret'), isFalse);
+    });
+
     test('fromJson works', () {
       final Map<String, dynamic> json = <String, dynamic>{
         'client_id': 'client',
+        'client_secret': 'client-secret',
         'redirect_uri': 'myapp://cb',
         'state': 's',
         'nonce': 'n',
@@ -63,6 +84,7 @@ void main() {
       final AuthorizationRequestParams params = AuthorizationRequestParams.fromJson(json);
 
       expect(params.clientId, 'client');
+      expect(params.clientSecret, 'client-secret');
       expect(params.redirectUri, 'myapp://cb');
       expect(params.state, 's');
       expect(params.nonce, 'n');

@@ -9,6 +9,7 @@ part of 'authorization_request_params.dart';
 AuthorizationRequestParams _$AuthorizationRequestParamsFromJson(Map<String, dynamic> json) =>
     AuthorizationRequestParams(
       clientId: json['client_id'] as String,
+      clientSecret: json['client_secret'] as String?,
       redirectUri: json['redirect_uri'] as String,
       state: json['state'] as String,
       nonce: json['nonce'] as String,
@@ -22,6 +23,7 @@ AuthorizationRequestParams _$AuthorizationRequestParamsFromJson(Map<String, dyna
 Map<String, dynamic> _$AuthorizationRequestParamsToJson(AuthorizationRequestParams instance) => <String, dynamic>{
   'response_type': instance.responseType,
   'client_id': instance.clientId,
+  'client_secret': ?instance.clientSecret,
   'redirect_uri': instance.redirectUri,
   'scope': _$JsonConverterToJson<String, List<CognitoScope>>(instance.scopes, const ScopeListConverter().toJson),
   'state': instance.state,

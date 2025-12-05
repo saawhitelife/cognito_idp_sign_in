@@ -32,6 +32,7 @@ void main() {
     const String redirectUriString = 'myapp://cb';
     final Uri redirectUri = Uri.parse(redirectUriString);
     const String clientId = 'client-123';
+    const String clientSecret = 'client-secret-xyz';
     const String state = 'st-xyz';
     const String nonce = 'nonce-abc';
     const String identityProvider = 'SignInWithApple';
@@ -52,6 +53,7 @@ void main() {
 
       final WebAuthFlowResult res = await sut.startWebAuthFlow(
         clientId: clientId,
+        clientSecret: clientSecret,
         redirectUri: redirectUri,
         state: state,
         nonce: nonce,
@@ -85,6 +87,7 @@ void main() {
 
       final Map<String, String> qp = uri.queryParameters;
       expect(qp['client_id'], clientId);
+      expect(qp['client_secret'], clientSecret);
       expect(qp['redirect_uri'], redirectUri.toString());
       expect(qp['state'], state);
       expect(qp['nonce'], nonce);
@@ -105,6 +108,7 @@ void main() {
 
       final WebAuthFlowResult res = await sut.startWebAuthFlow(
         clientId: clientId,
+        clientSecret: clientSecret,
         redirectUri: redirectUri,
         state: state,
         nonce: nonce,
@@ -144,6 +148,7 @@ void main() {
 
       final WebAuthFlowResult res = await sut.startWebAuthFlow(
         clientId: clientId,
+        clientSecret: clientSecret,
         redirectUri: redirectUri,
         state: state,
         nonce: nonce,
@@ -181,6 +186,7 @@ void main() {
 
       final WebAuthFlowResult res = await sut.startWebAuthFlow(
         clientId: clientId,
+        clientSecret: clientSecret,
         redirectUri: redirectUri,
         state: state,
         nonce: nonce,

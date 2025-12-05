@@ -24,6 +24,7 @@ typedef IdentityProviderName = String;
 /// final options = CognitoIdpSignInOptions(
 ///   poolId: 'us-east-1_abc123',
 ///   clientId: 'your-client-id',
+///   clientSecret: 'your-client-secret', // Optional
 ///   hostedUiDomain: 'your-app.auth.us-east-1.amazoncognito.com',
 ///   redirectUri: Uri.parse('myapp://'),
 ///   identityProviderName: 'SignInWithApple',
@@ -37,6 +38,7 @@ typedef IdentityProviderName = String;
 /// final options = CognitoIdpSignInOptions(
 ///   poolId: 'us-east-1_abc123',
 ///   clientId: 'your-client-id',
+///   clientSecret: 'your-client-secret', // Optional
 ///   hostedUiDomain: 'your-app.auth.us-east-1.amazoncognito.com',
 ///   redirectUri: kIsWeb
 ///     ? Uri.parse('http://localhost:8080/auth.html')
@@ -48,6 +50,7 @@ class CognitoIdpSignInOptions {
   const CognitoIdpSignInOptions({
     required this.poolId,
     required this.clientId,
+    this.clientSecret,
     required this.hostedUiDomain,
     required this.redirectUri,
     required this.identityProviderName,
@@ -65,8 +68,16 @@ class CognitoIdpSignInOptions {
   /// The format is typically "region_poolId" (e.g., "us-east-1_abc123").
   final String poolId;
 
-  /// The OAuth 2.0 client ID registered in the Cognito User Pool.
+  /// The OAuth 2.0 client ID registered in the Cognito User Pool that is used
+  /// when exchanging the authorization code for tokens.
   final String clientId;
+
+  /// Optional client secret associated with the Cognito app client.
+  ///
+  /// Leave null when the app client does not require a secret (mobile
+  /// clients). When provided, the secret will be forwarded to the Hosted UI
+  /// authorization request and token exchange.
+  final String? clientSecret;
 
   /// The hosted UI domain for the Cognito User Pool.
   ///
@@ -162,6 +173,7 @@ class CognitoIdpSignInOptions {
     return CognitoIdpSignInOptions(
       poolId: localOverrides.poolId ?? poolId,
       clientId: localOverrides.clientId ?? clientId,
+      clientSecret: localOverrides.clientSecret ?? clientSecret,
       hostedUiDomain: localOverrides.hostedUiDomain ?? hostedUiDomain,
       redirectUri: localOverrides.redirectUri ?? redirectUri,
       codeChallengeMethod: localOverrides.codeChallengeMethod ?? codeChallengeMethod,
@@ -200,6 +212,7 @@ class CognitoIdpSignInOptionsOverrides {
     this.identityProviderName,
     this.redirectUri,
     this.clientId,
+    this.clientSecret,
     this.hostedUiDomain,
     this.poolId,
     this.webAuthOptions,
@@ -210,6 +223,9 @@ class CognitoIdpSignInOptionsOverrides {
 
   /// Overrides the OAuth 2.0 client ID.
   final String? clientId;
+
+  /// Overrides the optional client secret.
+  final String? clientSecret;
 
   /// Overrides the hosted UI domain.
   final String? hostedUiDomain;

@@ -8,6 +8,7 @@ part 'authorization_request_params.g.dart';
 class AuthorizationRequestParams {
   AuthorizationRequestParams({
     required this.clientId,
+    this.clientSecret,
     required this.redirectUri,
     required this.state,
     required this.nonce,
@@ -23,6 +24,8 @@ class AuthorizationRequestParams {
   final String responseType;
   @JsonKey(name: 'client_id')
   final String clientId;
+  @JsonKey(name: 'client_secret', includeIfNull: false)
+  final String? clientSecret;
   @JsonKey(name: 'redirect_uri')
   final String redirectUri;
   @ScopeListConverter()

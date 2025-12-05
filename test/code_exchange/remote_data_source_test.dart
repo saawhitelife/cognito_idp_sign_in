@@ -19,6 +19,7 @@ void main() {
   test('calls /oauth2/token with CodeExchangeData.toJson body', () async {
     final CodeExchangeData code = CodeExchangeData(
       clientId: 'abc',
+      clientSecret: 'secret-123',
       code: 'theAuthCode',
       redirectUri: 'myapp://cb',
       codeVerifier: 'verifier123',

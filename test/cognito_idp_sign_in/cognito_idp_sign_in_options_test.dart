@@ -20,6 +20,7 @@ void main() {
       final CognitoIdpSignInOptions options = CognitoIdpSignInOptions(
         poolId: 'us-east-1_test',
         clientId: 'client-123',
+        clientSecret: 'client-secret-123',
         hostedUiDomain: 'example.auth.us-east-1.amazoncognito.com',
         redirectUri: Uri.parse('myapp://'),
         identityProviderName: 'SignInWithApple',
@@ -37,6 +38,7 @@ void main() {
       final CognitoIdpSignInOptionsOverrides overrides = CognitoIdpSignInOptionsOverrides(
         poolId: 'us-east-1_test_overriden',
         clientId: 'client-123_overriden',
+        clientSecret: 'client-secret-override',
         hostedUiDomain: 'example.auth.us-east-1.amazoncognito.com_overriden',
         redirectUri: Uri.parse('myappoverriden://'),
         identityProviderName: 'SignInWithApple_overriden',
@@ -53,6 +55,7 @@ void main() {
 
       expect(result.poolId, 'us-east-1_test_overriden');
       expect(result.clientId, 'client-123_overriden');
+      expect(result.clientSecret, 'client-secret-override');
       expect(result.hostedUiDomain, 'example.auth.us-east-1.amazoncognito.com_overriden');
       expect(result.redirectUri, Uri.parse('myappoverriden://'));
       expect(result.identityProviderName, 'SignInWithApple_overriden');

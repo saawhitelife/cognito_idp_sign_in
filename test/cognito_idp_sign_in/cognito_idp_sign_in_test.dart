@@ -37,6 +37,7 @@ void main() {
       options = CognitoIdpSignInOptions(
         poolId: 'us-east-1_test',
         clientId: 'client-123',
+        clientSecret: 'client-secret-123',
         hostedUiDomain: 'example.auth.us-east-1.amazoncognito.com',
         redirectUri: Uri.parse('myapp://'),
         identityProviderName: 'SignInWithApple',
@@ -156,6 +157,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -196,6 +198,7 @@ void main() {
           verify(
             () => mockCognitoIdpWebAuth.startWebAuthFlow(
               clientId: options.clientId,
+              clientSecret: options.clientSecret,
               redirectUri: options.redirectUri,
               state: state,
               nonce: nonce,
@@ -229,6 +232,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -271,6 +275,7 @@ void main() {
             state: state,
             nonce: nonce,
             identityProvider: options.identityProviderName,
+            clientSecret: options.clientSecret,
             codeChallenge: codeChallenge,
             codeChallengeMethod: options.codeChallengeMethod,
             scopes: options.scopes ?? <CognitoScope>[],
@@ -302,6 +307,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -342,6 +348,7 @@ void main() {
             identityProvider: options.identityProviderName,
             codeChallenge: codeChallenge,
             codeChallengeMethod: options.codeChallengeMethod,
+            clientSecret: options.clientSecret,
             scopes: options.scopes ?? <CognitoScope>[],
             customScopes: options.customScopes ?? <String>[],
             hostedUiDomain: options.hostedUiDomain,
@@ -375,6 +382,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -413,6 +421,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -487,6 +496,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -621,6 +631,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -681,6 +692,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -721,6 +733,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -773,6 +786,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -823,6 +837,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -868,6 +883,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -914,6 +930,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -937,6 +954,7 @@ void main() {
       test('options overrides properly propagate to all calls', () async {
         final CognitoIdpSignInOptionsOverrides overrides = CognitoIdpSignInOptionsOverrides(
           clientId: 'overridden-client-id',
+          clientSecret: 'overridden-client-secret',
           hostedUiDomain: 'overridden-domain.auth.region.amazoncognito.com',
           redirectUri: Uri.parse('overridden-scheme://'),
           identityProviderName: 'OverriddenProvider',
@@ -950,6 +968,7 @@ void main() {
         );
 
         final String expectedClientId = overrides.clientId!;
+        final String expectedClientSecret = overrides.clientSecret!;
         final String expectedHostedUiDomain = overrides.hostedUiDomain!;
         final Uri expectedRedirectUri = overrides.redirectUri!;
         final String expectedIdentityProvider = overrides.identityProviderName!;
@@ -976,6 +995,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
@@ -1022,6 +1042,7 @@ void main() {
         verify(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: expectedClientId,
+            clientSecret: expectedClientSecret,
             redirectUri: expectedRedirectUri,
             state: expectedState,
             nonce: expectedNonce,
@@ -1039,6 +1060,7 @@ void main() {
           () => mockRemoteDataSource.exchangeCodeForAuthData(
             CodeExchangeData(
               clientId: expectedClientId,
+              clientSecret: expectedClientSecret,
               redirectUri: expectedRedirectUri.toString(),
               code: callbackParams.code,
               codeVerifier: codeVerifier,
@@ -1061,6 +1083,7 @@ void main() {
         when(
           () => mockCognitoIdpWebAuth.startWebAuthFlow(
             clientId: any(named: 'clientId'),
+            clientSecret: any(named: 'clientSecret'),
             redirectUri: any(named: 'redirectUri'),
             state: any(named: 'state'),
             nonce: any(named: 'nonce'),
