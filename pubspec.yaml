@@ -1,7 +1,5 @@
 name: cognito_idp_sign_in
-description: >-
-  Convenience wrapper over flutter_web_auth_2 for AWS Cognito authentication with OAuth 2.0 and PKCE. 
-  Supports Sign in with Apple, Google, and other identity providers through Cognito User Pools.
+description: Flutter wrapper over flutter_web_auth_2 for AWS Cognito OAuth 2.0/PKCE sign-in via the Hosted UI and common third-party IdPs.
 version: 0.1.1
 repository: https://github.com/saawhitelife/cognito_idp_sign_in
 homepage: https://github.com/saawhitelife/cognito_idp_sign_in
